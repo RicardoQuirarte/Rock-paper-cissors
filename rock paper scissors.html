@@ -9,52 +9,67 @@ function getComputerChoice() {
     return randomArray = myArray[randomIndex];
 }
 
-const playerSelection = 'rock';
+
 const computerSelection = getComputerChoice();
 
-function playRound (playerSelection, computerSelection) {
+function playRound(playerSelection, computerSelection) {
     if (playerSelection == 'rock' && computerSelection == 'rock') {
-        return losingMessage = 'It is a tie! Try again';
+        return 'It is a tie! Try again';
     }
     else if (playerSelection == 'rock' && computerSelection == 'paper') {
-        return losingMessage = 'You lose! Paper beats rock';
+        computerScore++;
+        return 'You lose! Paper beats rock';
     }
     else if (playerSelection == 'rock' && computerSelection == 'scissors') {
-        return losingMessage = 'You win! Rock beats scissors';
+        userScore++;
+        return 'You win! Rock beats scissors';
     }
     else if (playerSelection == 'paper' && computerSelection == 'rock') {
-        return losingMessage = 'You win! Paper beats rock';
+        userScore++
+        return 'You win! Paper beats rock';
     }
     else if (playerSelection == 'paper' && computerSelection == 'paper') {
-        return losingMessage = 'It is a tie! Try again';
+        return 'It is a tie! Try again';
     }
     else if (playerSelection == 'paper' && computerSelection == 'scissors') {
-        return losingMessage = 'You lose! Scissors beats paper';
+        computerScore++;
+        return 'You lose! Scissors beats paper';
     }
     else if (playerSelection == 'scissors' && computerSelection == 'rock') {
-        return losingMessage = 'You lose! Rock beats scissors';
+        computerScore++;
+        return 'You lose! Rock beats scissors';
     }
     else if (playerSelection == 'scissors' && computerSelection == 'paper') {
-        return losingMessage = 'You win! Scissors beats paper';
+        userScore++
+        return 'You win! Scissors beats paper';
     }
     else if (playerSelection == 'scissors' && computerSelection == 'scissors') {
-        return losingMessage = 'It is a tie! Try again';
+        return 'It is a tie! Try again';
     }
 }
-console.log(playRound(playerSelection, computerSelection));
 
+let userScore = 0;
+let computerScore = 0;
 
+function game() {
+    for (let i = 0; i < 5;) {
+        const computerSelection = getComputerChoice()
+        let playerSelection = prompt('Select one').toLowerCase();
+        console.log(playRound(playerSelection, computerSelection))
+        console.log('Your score = ' + userScore);
+        console.log('Computer score = ' + computerScore);
+        if (userScore == 5) {
+            return 'You win the game!!'
+        }
+        else if (computerScore == 5) {
+            return 'Computer have won the game!'
+        }
+        }
+}
+console.log (game())
 
 
 
 
 </script>
 </html>
-
-
-
-
-
-function game() {
-    playRound
-}
