@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Rock vs Paper vs Scissors</title>
+        <style>
+            body {display:flex;
+                justify-content:space-around;
+                align-items:center;
+                flex-direction: column;
+                background-image: url("Downloads/Rock\ vs.png");
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
+            }
+            div {margin-top: 100px;}
+            .ocultar {visibility: hidden;}
+            button {
+                width: 80px;
+                height: 40px;
+                font-size: 22px;
+                font-family: 'Bebas Neue', cursive;
+                background: linear-gradient(45deg, transparent 5%, #FF013C 5%);
+                border: 0;
+                color: #fff;
+                letter-spacing: 3px;
+                line-height: 15px;
+                box-shadow: 6px 0px 0px #00E6F6;
+                outline: transparent;
+                position: relative;
+                margin-right: 25px;
+            }
+            .losser {
+                margin-top: 200px;
+                font-size: 30px;
+                color: orange;
+            }
+        </style>
+    </head>
+    <body>
+    <p class="losser">....</p>
+    <p class="ocultar"><button>Play again?</button></p>
+    <div class="buttons">
+    <button class="rock">Rock</button>
+    <button class="paper">Paper</button>
+    <button class="scissors">Scissors</button>
+    </div>
+
+    <div id="results" style="font-size: 20px; color: orange;">Do you have what it takes?</div>
+    <div class="score" style="font-size: 18px; color: grey;">Your score</div>
+    <p class="resultados" style="font-size: 18px; color: grey;">Computer Score</p>
+
+</body>
+<script>
+
+let userScore = 0;
+let computerScore = 0;
+
+function getComputerChoice() {
+    const myArray = ['rock', 'paper', 'scissors'];
+    const randomIndex = Math.floor(Math.random() * myArray.length);
+    return randomArray = myArray[randomIndex];
+}
+
+function playRound(playerSelection, computerSelection) {
+    if (playerSelection == 'rock' && computerSelection == 'rock') {
+        return 'It is a tie! Try again';
+    }
+    else if (playerSelection == 'rock' && computerSelection == 'paper') {
+        computerScore++;
+        return 'You lose! Paper beats rock';
+    }
+    else if (playerSelection == 'rock' && computerSelection == 'scissors') {
+        userScore++;
+        return 'You win! Rock beats scissors';
+    }
+    else if (playerSelection == 'paper' && computerSelection == 'rock') {
+        userScore++;
+        return 'You win! Paper beats rock';
+    }
+    else if (playerSelection == 'paper' && computerSelection == 'paper') {
+        return 'It is a tie! Try again';
+    }
+    else if (playerSelection == 'paper' && computerSelection == 'scissors') {
+        computerScore++;
+        return 'You lose! Scissors beats paper';
+    }
+    else if (playerSelection == 'scissors' && computerSelection == 'rock') {
+        computerScore++;
+        return 'You lose! Rock beats scissors';
+    }
+    else if (playerSelection == 'scissors' && computerSelection == 'paper') {
+        userScore++;
+        return 'You win! Scissors beats paper';
+    }
+    else if (playerSelection == 'scissors' && computerSelection == 'scissors') {
+        return 'It is a tie! Try again';
+    }
+}
+
+const rock = document.querySelector('.rock');
+const score = document.querySelector('.score');
+const para = document.querySelector('.resultados');
+const ocultar = document.querySelector('.ocultar');
+const paper = document.querySelector('.paper');
+const losser = document.querySelector('.losser');
+const scissors = document.querySelector('.scissors');
+const buttons = document.querySelectorAll('.buttons');
+
+
+function updateScores (userScore, computerScore) {
+    score.textContent = 'Your score = ' + userScore;
+    para.textContent = 'Computer score = ' + computerScore;
+}
+
+function updateWinner() {
+    losser.textContent = 'You won the game!!';
+    ocultar.classList.remove('ocultar');
+}
+
+function updateLosser() {
+    losser.textContent = 'Computer have won the game';
+    ocultar.classList.remove('ocultar');
+}
+
+
+rock.addEventListener('click', () => {
+    const computerSelection = getComputerChoice();
+    results.textContent = (playRound('rock', computerSelection));
+    updateScores(userScore, computerScore);
+    if (userScore == 5) {
+        updateWinner();
+        rock.disabled = true;
+}
+else if (computerScore == 5) {
+    updateLosser();
+    rock.disabled = true;
+}
+});
+
+paper.addEventListener('click', () => {
+    const computerSelection = getComputerChoice();
+    results.textContent = (playRound('paper', computerSelection));
+    updateScores(userScore, computerScore);
+    if (userScore == 5) {
+        updateWinner();
+        paper.disabled = true;
+}
+else if (computerScore == 5) {
+    updateLosser();
+    paper.disabled = true;
+}
+});
+
+scissors.addEventListener('click', () => {
+    const computerSelection = getComputerChoice();
+    results.textContent = (playRound('scissors', computerSelection));
+    updateScores(userScore, computerScore);
+    if (userScore == 5) {
+        updateWinner();
+        scissors.disabled = true;
+}
+else if (computerScore == 5) {
+    updateLosser();
+    scissors.disabled = true;
+}
+});
+
+
+ocultar.addEventListener('click', () => location.reload());
+
+</script>
+</html>
